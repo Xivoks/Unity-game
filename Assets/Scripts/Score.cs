@@ -1,6 +1,5 @@
 using TMPro;
 using UnityEngine;
-using TMPro;
 public class Score : MonoBehaviour
 {
     public Transform player;
