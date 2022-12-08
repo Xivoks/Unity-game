@@ -7,6 +7,7 @@ TagManager:
   - Obstacle
   - SlowDown
   - BoostUp
+  - Jump
   layers:
   - Default
   - TransparentFX

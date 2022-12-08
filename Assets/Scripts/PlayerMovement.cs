@@ -44,5 +44,9 @@ public class PlayerMovement : MonoBehaviour
             timeScale = 1;
             float speed = forwardForce / timeScale;
         }
+        if (collisionInfo.collider.tag == "Jump")
+        {
+            rb.AddForce(0, 7f, 0, ForceMode.VelocityChange);
+        }
     }
 }
