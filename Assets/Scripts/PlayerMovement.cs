@@ -2,13 +2,16 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    static int timeScale = 1;
     public Rigidbody rb;
-    public float forwardForce = 200f;
+    public float forwardForce = 3000f;
     public float sidewaysForce = 500f;
 
     void FixedUpdate()
     {
-        rb.AddForce(0, 0, forwardForce * Time.deltaTime/2);
+        float speed = forwardForce / timeScale;
+        Debug.Log(speed);
+        rb.AddForce(0, 0, speed * Time.deltaTime);
         if (Input.GetKey("d"))
         {
             rb.AddForce(sidewaysForce * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
@@ -22,6 +25,24 @@ public class PlayerMovement : MonoBehaviour
         if (rb.position.y < -1f)
         {
             FindObjectOfType<GameManager>().EndGame();
+        }
+    }
+
+    private void OnCollisionEnter(Collision collisionInfo)
+    {
+        if (collisionInfo.collider.tag == "SlowDown")
+        {
+            timeScale = 2;
+        }
+
+        if (collisionInfo.collider.tag == "BoostUp")
+        {
+            timeScale = 1;
+        }
+        if (collisionInfo.collider.tag == "Respawn")
+        {
+            timeScale = 1;
+            float speed = forwardForce / timeScale;
         }
     }
 }
